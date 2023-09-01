@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author br1st
  */
-public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
+public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
     
     private DefaultTableModel modelo = new DefaultTableModel() {
            
@@ -19,12 +19,12 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    
+
 
     /**
-     * Creates new form BusquedaPorNombreView
+     * Creates new form BusquedaPorPrecioView
      */
-    public BusquedaPorNombreView() {
+    public BusquedaPorPrecioView() {
         initComponents();
         armarCabecera();
     }
@@ -40,22 +40,18 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jtNombreBuscar = new javax.swing.JTextField();
+        jtPrecioMin = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jtPrecioMax = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
 
-        setClosable(true);
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setText("Listado por Nombre");
+        jLabel1.setText("Listado por Precio");
 
-        jLabel2.setText("Escriba los primeros caracteres:");
+        jLabel2.setText("Entre $:");
 
-        jtNombreBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtNombreBuscarKeyReleased(evt);
-            }
-        });
+        jLabel3.setText("y");
 
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,18 +70,26 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(109, 109, 109))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtNombreBuscar)))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(12, 12, 12)
+                                .addComponent(jtPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(103, 103, 103)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,33 +100,16 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtNombreBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreBuscarKeyReleased
-        // TODO add your handling code here:
-        System.out.println("Soltando tecla");
-        borrarFilas();
-        
-        for(Producto prod:MenuView.listaProductos){
-            
-            if(prod.getDescripcion().toLowerCase().startsWith(jtNombreBuscar.getText().toLowerCase())) {
-                
-                modelo.addRow(new Object[]{
-                    prod.getCodigo(),
-                    prod.getDescripcion(),
-                    prod.getPrecio(),
-                    prod.getStock()
-                });
-            }
-        }
-    }//GEN-LAST:event_jtNombreBuscarKeyReleased
 
     private void armarCabecera() {
         modelo.addColumn("Codigo");
@@ -131,21 +118,14 @@ public class BusquedaPorNombreView extends javax.swing.JInternalFrame {
         modelo.addColumn("Stock");
         jtProductos.setModel(modelo);
     }
-    
-    private void borrarFilas() {
-        System.out.println(jtProductos.getRowCount());
-        int filasOcupadas = jtProductos.getRowCount() - 1;
-        for(;filasOcupadas>=0;filasOcupadas-- ){
-            
-            modelo.removeRow(filasOcupadas);
-        }
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtNombreBuscar;
+    private javax.swing.JTextField jtPrecioMax;
+    private javax.swing.JTextField jtPrecioMin;
     private javax.swing.JTable jtProductos;
     // End of variables declaration//GEN-END:variables
 }

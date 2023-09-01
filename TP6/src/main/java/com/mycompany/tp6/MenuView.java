@@ -33,12 +33,12 @@ public class MenuView extends javax.swing.JFrame {
 
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmAdministracion = new javax.swing.JMenu();
+        jmiAdmProductos = new javax.swing.JMenuItem();
+        jmConsultas = new javax.swing.JMenu();
+        jmiConsultaPorRubro = new javax.swing.JMenuItem();
+        jmiConsultaPorNombre = new javax.swing.JMenuItem();
+        jmiConsultaPorPrecio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 600));
@@ -54,30 +54,45 @@ public class MenuView extends javax.swing.JFrame {
             .addGap(0, 277, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Administracion");
+        jmAdministracion.setText("Administracion");
 
-        jMenuItem1.setText("Productos");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Consultas");
-
-        jMenuItem2.setText("Por rubro...");
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem3.setText("Por nombre...");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmiAdmProductos.setText("Productos");
+        jmiAdmProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmiAdmProductosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jmAdministracion.add(jmiAdmProductos);
 
-        jMenuItem4.setText("Por precio...");
-        jMenu2.add(jMenuItem4);
+        jMenuBar1.add(jmAdministracion);
 
-        jMenuBar1.add(jMenu2);
+        jmConsultas.setText("Consultas");
+
+        jmiConsultaPorRubro.setText("Por rubro...");
+        jmiConsultaPorRubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiConsultaPorRubroActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiConsultaPorRubro);
+
+        jmiConsultaPorNombre.setText("Por nombre...");
+        jmiConsultaPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiConsultaPorNombreActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiConsultaPorNombre);
+
+        jmiConsultaPorPrecio.setText("Por precio...");
+        jmiConsultaPorPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiConsultaPorPrecioActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmiConsultaPorPrecio);
+
+        jMenuBar1.add(jmConsultas);
 
         setJMenuBar(jMenuBar1);
 
@@ -95,7 +110,7 @@ public class MenuView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmiConsultaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultaPorNombreActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
@@ -103,7 +118,37 @@ public class MenuView extends javax.swing.JFrame {
         bpn.setVisible(true);
         escritorio.add(bpn);
         escritorio.moveToFront(bpn);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmiConsultaPorNombreActionPerformed
+
+    private void jmiAdmProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdmProductosActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionDeProductosView gdpv = new GestionDeProductosView();
+        gdpv.setVisible(true);
+        escritorio.add(gdpv);
+        escritorio.moveToFront(gdpv);
+    }//GEN-LAST:event_jmiAdmProductosActionPerformed
+
+    private void jmiConsultaPorRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultaPorRubroActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        BusquedaPorRubroView bprv = new BusquedaPorRubroView();
+        bprv.setVisible(true);
+        escritorio.add(bprv);
+        escritorio.moveToFront(bprv);
+    }//GEN-LAST:event_jmiConsultaPorRubroActionPerformed
+
+    private void jmiConsultaPorPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultaPorPrecioActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        BusquedaPorPrecioView bppv = new BusquedaPorPrecioView();
+        bppv.setVisible(true);
+        escritorio.add(bppv);
+        escritorio.moveToFront(bppv);
+    }//GEN-LAST:event_jmiConsultaPorPrecioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,12 +193,12 @@ public class MenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jmAdministracion;
+    private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenuItem jmiAdmProductos;
+    private javax.swing.JMenuItem jmiConsultaPorNombre;
+    private javax.swing.JMenuItem jmiConsultaPorPrecio;
+    private javax.swing.JMenuItem jmiConsultaPorRubro;
     // End of variables declaration//GEN-END:variables
 }
