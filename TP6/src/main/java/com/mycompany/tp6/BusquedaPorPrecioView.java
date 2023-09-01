@@ -4,6 +4,11 @@
  */
 package com.mycompany.tp6;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +32,7 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
     public BusquedaPorPrecioView() {
         initComponents();
         armarCabecera();
+        llenarTabla();
     }
 
     /**
@@ -51,7 +57,29 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Entre $:");
 
+        jtPrecioMin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtPrecioMinFocusLost(evt);
+            }
+        });
+        jtPrecioMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtPrecioMinKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("y");
+
+        jtPrecioMax.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtPrecioMaxFocusLost(evt);
+            }
+        });
+        jtPrecioMax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtPrecioMaxKeyPressed(evt);
+            }
+        });
 
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,14 +139,172 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtPrecioMinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtPrecioMinFocusLost
+
+        administrarPrecios();
+    }//GEN-LAST:event_jtPrecioMinFocusLost
+
+    private void jtPrecioMaxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtPrecioMaxFocusLost
+
+        administrarPrecios();
+    }//GEN-LAST:event_jtPrecioMaxFocusLost
+
+    private void jtPrecioMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecioMinKeyPressed
+        // TODO add your handling code here:
+        int tecla = evt.getKeyCode();
+        if(tecla == 10) {
+            administrarPrecios();
+        }
+    }//GEN-LAST:event_jtPrecioMinKeyPressed
+
+    private void jtPrecioMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecioMaxKeyPressed
+        // TODO add your handling code here:
+        int tecla = evt.getKeyCode();
+        if(tecla == 10) {
+
+            administrarPrecios();
+        }
+    }//GEN-LAST:event_jtPrecioMaxKeyPressed
+
     private void armarCabecera() {
         modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Precio");
+        modelo.addColumn("Categoria");
         modelo.addColumn("Stock");
         jtProductos.setModel(modelo);
     }
+    
+    private void llenarTabla() {
+        for(Producto prod:MenuView.listaProductos){
+            modelo.addRow(new Object[]{
+                    prod.getCodigo(),
+                    prod.getDescripcion(),
+                    prod.getPrecio(),
+                    prod.getStock()
+                });
+        }
+    }
+    
+    private void llenarTablaSegunPrecioMin(double precioMin) {
 
+        if (precioMin >= 0.0) {
+
+            for (Producto prod : MenuView.listaProductos) {
+
+                if (prod.getPrecio() >= precioMin) {
+                    modelo.addRow(new Object[]{
+                        prod.getCodigo(),
+                        prod.getDescripcion(),
+                        prod.getPrecio(),
+                        prod.getRubro(),
+                        prod.getStock()
+                    });
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se aceptan numeros negativos");
+        }
+
+    }
+    
+    private void llenarTablaSegunPrecioMax(double precioMax) {
+
+        if (precioMax > 0) {
+
+            for (Producto prod : MenuView.listaProductos) {
+
+                if (prod.getPrecio() <= precioMax) {
+                    modelo.addRow(new Object[]{
+                        prod.getCodigo(),
+                        prod.getDescripcion(),
+                        prod.getPrecio(),
+                        prod.getRubro(),
+                        prod.getStock()
+                    });
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "El maximo debe ser mayor que 0");
+        }
+
+    }
+
+    private void borrarFilas() {
+        int filasOcupadas = jtProductos.getRowCount() - 1;
+        for(;filasOcupadas>=0;filasOcupadas-- ){
+            
+            modelo.removeRow(filasOcupadas);
+        }
+    } 
+
+    private void administrarPrecios(){
+        String precioMin = jtPrecioMin.getText();
+        String precioMax = jtPrecioMax.getText();
+        
+        if(precioMin.isBlank()){
+            
+            if(precioMax.isBlank()){
+                
+                JOptionPane.showMessageDialog(this, "Debe colocar algun precio");
+                
+            }else{
+                
+                try{
+                    double precioMaximo = Double.parseDouble(precioMax);
+                    borrarFilas();
+                    llenarTablaSegunPrecioMax(precioMaximo);
+                    
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El formato del precio maximo es incorrecto");
+                }               
+            }
+            
+        }else{
+            
+            if(precioMax.isBlank()){
+                
+                try{
+                    double precioMinimo = Double.parseDouble(precioMin);
+                    borrarFilas();
+                    llenarTablaSegunPrecioMin(precioMinimo);
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El formato del precio minimo es incorrecto");
+                }
+                
+            }else{
+                
+                try{
+                    double precioMaximo = Double.parseDouble(precioMax);
+                    double precioMinimo = Double.parseDouble(precioMin);
+                    borrarFilas();
+                llenarTablaConMinimoYMaximo(precioMinimo, precioMaximo);
+                }catch(NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "El formato es incorrecto");
+                }
+                
+            }
+        }
+    }
+    
+    private void llenarTablaConMinimoYMaximo(double precioMin, double precioMax){
+        if(precioMin <= precioMax){
+            for (Producto prod : MenuView.listaProductos) {
+
+                if (precioMin <= prod.getPrecio() &&  prod.getPrecio() <= precioMax) {
+                    modelo.addRow(new Object[]{
+                        prod.getCodigo(),
+                        prod.getDescripcion(),
+                        prod.getPrecio(),
+                        prod.getRubro(),
+                        prod.getStock()
+                    });
+                }
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
