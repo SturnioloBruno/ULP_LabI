@@ -1,0 +1,16 @@
+# Excluir directorios generados por Maven en todos los proyectos
+**/target/
+
+# Excluir archivos de configuración específicos de NetBeans en todos los proyectos
+**/nb-configuration.xml
+**/nbactions.xml
+
+# Excluir directorios y archivos de compilación generados en todos los proyectos
+**/bin/
+**/out/
+**/build/
+**/dist/
+
+# Excluir directorios de IDE en todos los proyectos
+**/.idea/
+**/.vscode/
