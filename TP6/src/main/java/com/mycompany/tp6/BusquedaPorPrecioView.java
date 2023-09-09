@@ -51,17 +51,15 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
         jtPrecioMax = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Listado por Precio");
 
         jLabel2.setText("Entre $:");
 
-        jtPrecioMin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtPrecioMinFocusLost(evt);
-            }
-        });
         jtPrecioMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtPrecioMinKeyPressed(evt);
@@ -70,11 +68,6 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("y");
 
-        jtPrecioMax.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtPrecioMaxFocusLost(evt);
-            }
-        });
         jtPrecioMax.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtPrecioMaxKeyPressed(evt);
@@ -93,6 +86,13 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(jtProductos);
+
+        jButton1.setText("PressEnter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +117,9 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(103, 103, 103)))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addGap(36, 36, 36)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,24 +132,15 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jtPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtPrecioMinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtPrecioMinFocusLost
-
-        administrarPrecios();
-    }//GEN-LAST:event_jtPrecioMinFocusLost
-
-    private void jtPrecioMaxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtPrecioMaxFocusLost
-
-        administrarPrecios();
-    }//GEN-LAST:event_jtPrecioMaxFocusLost
 
     private void jtPrecioMinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecioMinKeyPressed
         // TODO add your handling code here:
@@ -165,6 +158,11 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
             administrarPrecios();
         }
     }//GEN-LAST:event_jtPrecioMaxKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        administrarPrecios();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void armarCabecera() {
         modelo.addColumn("Codigo");
@@ -306,6 +304,7 @@ public class BusquedaPorPrecioView extends javax.swing.JInternalFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
