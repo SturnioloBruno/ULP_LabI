@@ -227,20 +227,31 @@ public class GestionDeProductosView extends javax.swing.JInternalFrame {
             int stock = Integer.parseInt(jtStock.getText());
             
             // Antes de crear el nuevo producto, verifico que no exista uno con el mismo codigo
-            for(Producto prod: MenuView.listaProductos){
-                if(prod.getCodigo() == codigo){
-                    JOptionPane.showMessageDialog(this, "Ya existe un producto con ese codigo");
-                    return;
-                }
-            }
+//            for(Producto prod: MenuView.listaProductos){
+//                if(prod.getCodigo() == codigo){
+//                    JOptionPane.showMessageDialog(this, "Ya existe un producto con ese codigo");
+//                    return;
+//                }
+//            }
+            
             if(descripcion.length() == 0 || jcRubro.getSelectedIndex() == -1){
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
             }
+            
+            // Metodo alternativo para fijarme si hay un producto igual antes y guardarlo en los comentarios del mismo metodo:
+            boolean repetido = MenuView.listaProductos.add(new Producto(codigo, descripcion, precio, stock, rubro));
+            if(repetido){
+                JOptionPane.showMessageDialog(this, "Producto guardado con exito");
+            }else{
+                JOptionPane.showMessageDialog(this, "Ya existe un producto con ese codigo");
+            }
+            
+            
             // Creo el producto y lo agrego
-            Producto prodNuevo = new Producto(codigo, descripcion, precio, stock, rubro);
-            MenuView.listaProductos.add(prodNuevo);
-            JOptionPane.showMessageDialog(this, "Producto guardado con exito");
+//            Producto prodNuevo = new Producto(codigo, descripcion, precio, stock, rubro);
+//            MenuView.listaProductos.add(prodNuevo);
+//            JOptionPane.showMessageDialog(this, "Producto guardado con exito");
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(this, "error de formato, el codigo debe ser un numero entero, el precio un real, y el stock un entero");
