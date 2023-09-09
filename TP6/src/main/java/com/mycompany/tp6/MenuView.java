@@ -184,11 +184,27 @@ public class MenuView extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void cargarProductos() {
-        listaProductos.add(new Producto(10,"Azucar x 1 Kg", 180.75, 5, Categoria.COMESTIBLE));
-        listaProductos.add(new Producto(12,"Yerba Mate", 850, 10, Categoria.COMESTIBLE));
-        listaProductos.add(new Producto(5,"Aceite de Girasol", 250.5, 5, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(10, "Azucar x 1 Kg", 180.75, 5, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(12, "Yerba Mate", 850, 10, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(5, "Aceite de Girasol", 250.5, 5, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(20, "Detergente x 1 Litro", 120.0, 15, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(8, "Jabón en Barra", 30.25, 30, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(15, "Champú Anticaspa", 220.0, 8, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(25, "Perfume Floral", 450.0, 3, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(3, "Arroz x 5 Kg", 350.0, 12, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(7, "Leche Descremada x 1 Litro", 60.5, 20, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(30, "Pan Blanco", 25.0, 50, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(35, "Papel Higiénico x 4 Rollos", 80.0, 25, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(40, "Shampoo de Volumen", 180.0, 15, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(45, "Sal Refinada x 500g", 12.0, 40, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(50, "Chocolate Negro", 45.0, 20, Categoria.COMESTIBLE));
+        listaProductos.add(new Producto(55, "Lavavajillas Líquido", 70.0, 10, Categoria.LIMPIEZA));
+        listaProductos.add(new Producto(60, "Colonia Floral", 120.0, 18, Categoria.PERFUMERIA));
+        listaProductos.add(new Producto(65, "Pasta de Dientes", 40.0, 30, Categoria.PERFUMERIA));
+
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
